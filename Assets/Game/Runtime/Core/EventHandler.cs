@@ -46,5 +46,31 @@ namespace Game.Runtime.Core
         {
             SelectDialogueOptionEvent?.Invoke(optionId);
         }
+
+        // 面具道具使用 和 收集异常 事件监听
+        public static event Action<MaskState> MaskStateChangedEvent;
+
+        public static void CallMaskStateChangedEvent(MaskState maskState)
+        {
+            MaskStateChangedEvent?.Invoke(maskState);
+        }
+
+        // 完成该异常
+        public static event Action<string> AnomalyCompletedEvent;
+
+        public static void CallAnomalyCompletedEvent(string anomalyName)
+        {
+            if (string.IsNullOrWhiteSpace(anomalyName)) return;
+            AnomalyCompletedEvent?.Invoke(anomalyName);
+        }
+
+        // 收集碎片
+        public static event Action<string> FragmentCollectedEvent;
+
+        public static void CallFragmentCollectedEvent(string fragmentName)
+        {
+            if (string.IsNullOrWhiteSpace(fragmentName)) return;
+            FragmentCollectedEvent?.Invoke(fragmentName);
+        }
     }
 }
