@@ -13,6 +13,10 @@ public class Player : MonoBehaviour
     [HideInInspector] public Animator anim;
     public float moveSpeed;
 
+    [Header("Interact")]
+    public LayerMask interactLayer;
+    public float interactRadius = 1.8f;
+
     public LayerMask obstacleLayer;
     private Collider2D playerCollider;
     private ContactFilter2D contactFilter;
@@ -76,6 +80,7 @@ public class Player : MonoBehaviour
 
 
         stateMachine.currentState.Update();
+        HandleInteract();
     }
 
     public void SetSpawnPosition(Vector3 position)
@@ -158,6 +163,36 @@ public class Player : MonoBehaviour
         agent.ResetPath();
     }
 
+    #endregion
+
+    #region 道具交互
+    private void HandleInteract()
+    {
+        if (GameManager.Instance.CurrentPhase != GamePhase.Gameplay) return;
+        if (interactAction == null) return;
+        if (!interactAction.WasPressedThisFrame()) return;
+
+        Vector2 pos = transform.position;
+        Collider2D[] hits = Physics2D.OverlapCircleAll(pos, interactRadius, interactLayer);
+
+        Interactable best = null;
+        float bestSqr = float.MaxValue;
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            var it = hits[i].GetComponent<Interactable>();
+            if (it == null) continue;
+
+            float sqr = ((Vector2)it.transform.position - pos).sqrMagnitude;
+            if (sqr < bestSqr)
+            {
+                bestSqr = sqr;
+                best = it;
+            }
+        }
+
+        best?.Interact();
+    }
     #endregion
 
     private void OnEnable()

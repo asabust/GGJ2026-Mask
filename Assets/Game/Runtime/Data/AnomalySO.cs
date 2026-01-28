@@ -11,6 +11,10 @@ namespace Game.Runtime.Data
         [Header("Monitor (Normal Snapshot)")]
         public Sprite monitorNormalSprite; // 监控室/Tab：正常画面截图
 
+        [Header("Fragment")]
+        public Sprite fragmentSprite;
+        [TextArea] public string fragmentDescription;
+
         [Header("Completion")]
         [TextArea]
         public string completionHintText;  // 完成提示文本

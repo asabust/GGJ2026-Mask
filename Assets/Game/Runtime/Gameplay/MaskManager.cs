@@ -21,9 +21,14 @@ namespace Game.Runtime.Core
     {
         // 当前面具状态（MaskOff 为默认）。
         [SerializeField] private MaskState maskState = MaskState.MaskOff;
+        // 以防剧情演出时或任何时候乱切面具
+        [SerializeField] private bool canToggle = true;
 
         // 获取当前面具状态（MaskOn / MaskOff）。
         public MaskState MaskState => maskState;
+
+        // 设置是否可以切面具
+        public void SetCanToggle(bool value) => canToggle = value;
 
         // 当前是否处于戴面具状态
         // - true：异常视角启用
@@ -62,8 +67,22 @@ namespace Game.Runtime.Core
         /// </summary>
         public void ToggleMask()
         {
+            if (!canToggle) return;
             SetMaskState(IsMaskOn ? MaskState.MaskOff : MaskState.MaskOn);
         }
+
+        // 切换回默认 面具摘下 状态
+        public void ResetMask()
+        {
+            SetMaskState(MaskState.MaskOff);
+        }
+
+        protected override void Awake()
+        {
+            base.Awake();
+            EventHandler.CallMaskStateChangedEvent(maskState);
+        }
+
     }
 }
 
