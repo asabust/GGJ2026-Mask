@@ -1,18 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
 using Game.Runtime.Core;
 using Game.Runtime.Core.Attributes;
-using Newtonsoft.Json;
 using UnityEngine;
 using EventHandler = Game.Runtime.Core.EventHandler;
 
 
 public class GameManager : Singleton<GameManager>
 {
-
-    [SceneName] string openingScene;
-    [SceneName] string titleScene;
+    [SceneName] public string openingScene;
+    [SceneName] public string titleScene;
     public GamePhase CurrentPhase { get; private set; }
 
     public void SetGamePhase(GamePhase newPhase)
@@ -23,15 +18,14 @@ public class GameManager : Singleton<GameManager>
 
     public bool IsGameplay => CurrentPhase == GamePhase.Gameplay;
 
-
-
     private void Start()
     {
-        GameTitle(); //从标题界面开始
+        StartNewGame();
+        //GameTitle(); //从标题界面开始
     }
 
     /// <summary>
-    /// 开始新游戏（进入开场剧情）
+    /// 开始新游戏
     /// </summary>
     public void StartNewGame()
     {
@@ -57,4 +51,3 @@ public class GameManager : Singleton<GameManager>
         Application.Quit();
     }
 }
-

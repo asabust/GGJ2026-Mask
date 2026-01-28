@@ -7,7 +7,7 @@ namespace Game.Runtime.Core
 {
     public class TransitionManager : Singleton<TransitionManager>
     {
-        public float fadeDuration;
+        public float fadeDuration = 1;
         private bool isFading = false;
 
         private string currentSceneName;
@@ -17,10 +17,7 @@ namespace Game.Runtime.Core
         {
             base.Awake();
             canvasGroup = GetComponentInChildren<CanvasGroup>();
-            if (!canvasGroup)
-            {
-                Debug.LogWarning("TransitionManager 子物体中没找到 canvasGroup 遮罩层");
-            }
+            if (!canvasGroup) Debug.LogWarning("TransitionManager 子物体中没找到 canvasGroup 遮罩层");
         }
 
         /// <summary>
@@ -56,7 +53,7 @@ namespace Game.Runtime.Core
             yield return SceneManager.LoadSceneAsync(toSceneName, LoadSceneMode.Additive);
 
             currentSceneName = toSceneName;
-            Scene newScene = SceneManager.GetSceneByName(toSceneName);
+            var newScene = SceneManager.GetSceneByName(toSceneName);
             SceneManager.SetActiveScene(newScene);
 
             EventHandler.CallAfterSceneLoadEvent(toSceneName);
@@ -68,7 +65,7 @@ namespace Game.Runtime.Core
             isFading = true;
             canvasGroup.blocksRaycasts = true;
 
-            float speed = Mathf.Abs(canvasGroup.alpha - targetAlpha) / fadeDuration;
+            var speed = Mathf.Abs(canvasGroup.alpha - targetAlpha) / fadeDuration;
             while (!Mathf.Approximately(canvasGroup.alpha, targetAlpha))
             {
                 canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, targetAlpha, speed * Time.deltaTime);
