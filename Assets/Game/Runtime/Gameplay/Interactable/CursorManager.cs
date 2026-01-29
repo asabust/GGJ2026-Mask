@@ -41,11 +41,13 @@ public class CursorManager : MonoBehaviour
         var screenPos = pointAction.action.ReadValue<Vector2>();
         Vector2 worldPos = mainCam.ScreenToWorldPoint(screenPos);
 
+        currentHover = Physics2D.OverlapPoint(worldPos, interactLayer);
+        // if (currentHover != null) 
 
         if (clickAction.action.WasPressedThisFrame())
         {
             player.NavigationToPosition(worldPos);
-            currentHover = Physics2D.OverlapPoint(worldPos, interactLayer);
+
             if (currentHover) currentHover.GetComponent<Interactable>()?.Interact();
         }
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public enum UILayer
 {
     Background, // 背景 UI（探索界面, 摇杆等）
-    Normal, // 普通功能 UI （线索界面，推理界面等）
+    Normal, // 普通功能 UI 
     Popup, // 提示，弹窗
     Top // 全屏遮罩 / Loading
 }
@@ -14,14 +14,13 @@ namespace Game.Runtime.Core
 {
     public class UIManager : Singleton<UIManager>
     {
-        [Header("Roots")]
-        public Transform backgroundRoot;
+        [Header("Roots")] public Transform backgroundRoot;
         public Transform normalRoot;
         public Transform popupRoot;
         public Transform topRoot;
 
         private readonly Dictionary<Type, UIPanel> panelDict = new();
-        
+
         /// <summary>
         /// 打开面板
         /// </summary>
@@ -32,16 +31,13 @@ namespace Game.Runtime.Core
         {
             var type = typeof(T);
 
-            if (!panelDict.TryGetValue(type, out var panel))
-            {
-                panel = CreatePanel<T>();
-            }
+            if (!panelDict.TryGetValue(type, out var panel)) panel = CreatePanel<T>();
 
             panel.gameObject.SetActive(true);
             panel.OnOpen(data);
 
             panel.transform.SetAsLastSibling(); // 保证在最上层
-            return (T) panel;
+            return (T)panel;
         }
 
         /// <summary>
@@ -72,8 +68,8 @@ namespace Game.Runtime.Core
         {
             // 暂时规定类名和prefab资源名字相同！！
             // 如果系统变复杂了，需要分文件夹之类的再改成SO配置
-            string path = $"UI/{typeof(T).Name}";
-            GameObject prefab = Resources.Load<GameObject>(path);
+            var path = $"UI/{typeof(T).Name}";
+            var prefab = Resources.Load<GameObject>(path);
 
             if (!prefab)
             {
@@ -81,10 +77,10 @@ namespace Game.Runtime.Core
                 return null;
             }
 
-            GameObject go = Instantiate(prefab);
-            T panel = go.GetComponent<T>();
+            var go = Instantiate(prefab);
+            var panel = go.GetComponent<T>();
 
-            Transform parent = GetLayerRoot(panel.layer);
+            var parent = GetLayerRoot(panel.layer);
             go.transform.SetParent(parent, false);
 
             panel.OnInit();
