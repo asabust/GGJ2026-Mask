@@ -2,6 +2,7 @@ using UnityEngine;
 using Game.Runtime.Core;
 using Game.Runtime.Data;
 
+// 目前暂时用来测试 异常物品的流程是否可以跑通
 public class MenuInteractable : Interactable
 {
     [SerializeField] private AnomalySO anomalySO;
@@ -9,10 +10,9 @@ public class MenuInteractable : Interactable
 
     public override void Interact()
     {
-        if (completed) return;
-        if (anomalySO == null) return;
+        if (completed) { return; }
+        if (anomalySO == null) { return; }
 
-        // 先写其他交互逻辑.......比如......
         completed = true;
 
         EventHandler.CallAnomalyCompletedEvent(anomalySO.anomalyName.ToString());
