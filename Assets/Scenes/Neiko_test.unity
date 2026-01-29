@@ -1294,6 +1294,8 @@ MonoBehaviour:
   anomalyList:
   - {fileID: 11400000, guid: ba8fbcb79bf614b6b83397a87f762473, type: 2}
   - {fileID: 11400000, guid: 0ff1ab6731ef6438aa48c1752518079b, type: 2}
+  itemList:
+  - {fileID: 11400000, guid: 40f08f48b582b4f009e32378c9002e13, type: 2}
 --- !u!1001 &1278984975
 PrefabInstance:
   m_ObjectHideFlags: 0
