@@ -72,5 +72,14 @@ namespace Game.Runtime.Core
             if (string.IsNullOrWhiteSpace(fragmentName)) return;
             FragmentCollectedEvent?.Invoke(fragmentName);
         }
+
+        // 收集普通道具
+        public static event Action<string> ItemCollectedEvent;
+
+        public static void CallItemCollectedEvent(string itemName)
+        {
+            if (string.IsNullOrWhiteSpace(itemName)) return;
+            ItemCollectedEvent?.Invoke(itemName);
+        }
     }
 }
