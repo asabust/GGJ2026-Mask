@@ -39,6 +39,10 @@ public class JigsawPuzzlePanel : UIPanel
     public void OnPiecePlaced(PuzzlePiece piece)
     {
         placedCount++;
-        if (placedCount == pieces.Count) Debug.Log("Puzzle Completed!");
+        if (placedCount == pieces.Count)
+        {
+            Debug.Log("Puzzle Completed!");
+            UIManager.Instance.Close<JigsawPuzzlePanel>();
+        }
     }
 }
