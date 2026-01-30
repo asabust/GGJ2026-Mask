@@ -1330,7 +1330,7 @@ MonoBehaviour:
   moveSpeed: 3
   dropSpeed: 4
   riseSpeed: 4
-  grabRadius: 1
+  grabRadius: 1.2
   baseGrabChance: 0.9
   dollLayer:
     serializedVersion: 2

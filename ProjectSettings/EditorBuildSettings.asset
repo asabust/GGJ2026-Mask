@@ -9,19 +9,19 @@ EditorBuildSettings:
     path: Assets/Scenes/Persistent.unity
     guid: 85ab62f68d27440099a4f826bfc04283
   - enabled: 1
+    path: Assets/Scenes/GameTitle.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: d9ac2e567363245ffb5d27734994390b
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Scenes/ClawMachineScene.unity
+    guid: 5d57e68ecacca4f97a84a8b567d22aa6
   - enabled: 1
-    path: Assets/Scenes/neiko_test.unity
+    path: Assets/Scenes/Neiko_test.unity
     guid: 5ee738b261ebc4a278b0268cefe0c686
   - enabled: 1
     path: Assets/Scenes/neiko_levelTest.unity
     guid: 38ec30c9c6eb045a49c52d8a354cde7b
-  - enabled: 1
-    path: Assets/Scenes/ClawMachineScene.unity
-    guid: 5d57e68ecacca4f97a84a8b567d22aa6
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: eab70bd9af3e74e81bdb3e4622899f52, type: 3}

@@ -8,8 +8,8 @@ using EventHandler = Game.Runtime.Core.EventHandler;
 public class GameManager : Singleton<GameManager>
 {
     public Player player;
-    [SceneName] public string openingScene;
     [SceneName] public string titleScene;
+    [SceneName] public string openingScene;
     [SceneName] public string clawMachineScene;
     public GamePhase CurrentPhase { get; private set; }
 
@@ -26,8 +26,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         player.gameObject.SetActive(false);
-        StartNewGame();
-        //GameTitle(); //从标题界面开始
+        GameTitle(); //从标题界面开始
     }
 
     /// <summary>
