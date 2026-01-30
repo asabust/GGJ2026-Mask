@@ -473,6 +473,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 696597567}
+  - component: {fileID: 696597568}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -497,6 +498,19 @@ Transform:
   - {fileID: 2139014400}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &696597568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696597566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ad3b6e5851534c8fb224cafea18fe6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vcam: {fileID: 2139014399}
 --- !u!1 &774251869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,6 +1294,10 @@ MonoBehaviour:
   moveDelta: {x: 0, y: 0}
   moveSpeed: 3
   maxDownNavDistance: 0
+  interactLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  interactRadius: 1.8
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1367,6 +1385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2139014400}
   - component: {fileID: 2139014399}
+  - component: {fileID: 2139014401}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -1429,6 +1448,22 @@ Transform:
   - {fileID: 299722331}
   m_Father: {fileID: 696597567}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2139014401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139014398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BoundingShape2D: {fileID: 0}
+  m_Damping: 0.5
+  m_MaxWindowSize: -1
+  m_Padding: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
