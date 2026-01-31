@@ -80,7 +80,8 @@ namespace Game.Runtime.Core
             entries.Add(new InvEntry {
                 type = InvType.Fragment,
                 key = fragmentName,
-                icon = so.fragmentSprite
+                icon = so.fragmentSprite,
+                description = so.fragmentDescription
             });
 
             InventoryChangedEvent?.Invoke();
@@ -98,6 +99,7 @@ namespace Game.Runtime.Core
             entries.Add(new InvEntry {
                 type = InvType.Item,
                 key = itemName,
+                description = so.description,
                 icon = so.icon
             });
 

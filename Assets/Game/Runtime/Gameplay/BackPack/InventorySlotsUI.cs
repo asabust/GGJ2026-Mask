@@ -39,6 +39,6 @@ public class InventorySlotsUI : MonoBehaviour
         int count = Mathf.Min(list.Count, slots.Length);
 
         for (int i = 0; i < count; i++)
-            if (slots[i] != null) slots[i].SetIcon(list[i].icon);
+            if (slots[i] != null) slots[i].SetEntry(list[i]);
     }
 }
