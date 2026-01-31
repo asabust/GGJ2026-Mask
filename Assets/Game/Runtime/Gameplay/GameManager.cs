@@ -58,7 +58,6 @@ public class GameManager : Singleton<GameManager>
     public void StartClawMachineGame()
     {
         SetGamePhase(GamePhase.ClawMachineGame);
-        player.gameObject.SetActive(false);
         lastGameScene = TransitionManager.Instance.currentSceneName;
         TransitionManager.Instance.TransitionTo(clawMachineScene);
     }

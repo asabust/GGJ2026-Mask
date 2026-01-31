@@ -66,10 +66,6 @@ public class ClawMachineController : MonoBehaviour
         state = ClawState.Moving;
     }
 
-    public void StopGame()
-    {
-    }
-
     /// <summary>
     /// 在“抓取”按钮被点击时调用
     /// </summary>
@@ -132,11 +128,10 @@ public class ClawMachineController : MonoBehaviour
         }
 
         // 5. 张爪动画
-        if (grabbedDoll) grabbedDoll.transform.localPosition += Vector3.down * (dropSpeed * Time.deltaTime);
+        if (grabbedDoll) grabbedDoll.PlayDrop(minY);
         yield return PlayAnimationAndWait(clawOpen);
 
         ReleaseAtExit();
-
 
         isGrabbing = false;
     }
@@ -148,7 +143,7 @@ public class ClawMachineController : MonoBehaviour
 
         if (!grabbedDoll)
         {
-            clawMachinePanel.ReStart();
+            clawMachinePanel.ShowRule();
         }
         else
         {

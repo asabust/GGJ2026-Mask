@@ -29,6 +29,7 @@ public class ClawMachinePanel : UIPanel
     public override void OnOpen(object data = null)
     {
         clawMachineController = data as ClawMachineController;
+        ShowRule();
     }
 
     private void OnGrabPressed()
@@ -37,7 +38,7 @@ public class ClawMachinePanel : UIPanel
         clawMachineController?.OnGrabPressed();
     }
 
-    public void StartGame()
+    private void StartGame()
     {
         rulePanel.gameObject.SetActive(false);
         clawMachineController?.StartGame();
@@ -46,8 +47,9 @@ public class ClawMachinePanel : UIPanel
         isCounting = true;
     }
 
-    public void ReStart()
+    public void ShowRule()
     {
+        timeText.text = totalTime.ToString("F2");
         rulePanel.gameObject.SetActive(true);
     }
 
