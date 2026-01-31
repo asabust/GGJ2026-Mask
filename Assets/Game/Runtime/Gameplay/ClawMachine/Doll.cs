@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class Doll : MonoBehaviour
@@ -22,6 +24,20 @@ public class Doll : MonoBehaviour
     {
         transform.SetParent(oldParent);
         if (col) col.enabled = true;
+    }
+
+    public void PlayDrop(float exitY)
+    {
+        StartCoroutine(Drop(exitY));
+    }
+
+    private IEnumerator Drop(float exitY)
+    {
+        while (transform.position.y > exitY)
+        {
+            transform.position += Vector3.down * (4 * Time.deltaTime);
+            yield return null;
+        }
     }
 
     public void OnReleasedAtExit()
