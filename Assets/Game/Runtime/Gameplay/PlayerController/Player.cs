@@ -15,8 +15,7 @@ public class Player : MonoBehaviour
     public float moveSpeed;
     public float maxDownNavDistance;
 
-    [Header("Interact")]
-    public LayerMask interactLayer;
+    [Header("Interact")] public LayerMask interactLayer;
     public float interactRadius = 1.8f;
 
     public LayerMask obstacleLayer;
@@ -25,6 +24,7 @@ public class Player : MonoBehaviour
     private Collider2D[] hits = new Collider2D[3];
 
     private NavMeshAgent agent;
+    private Action onNavigationCompletedAction;
 
     #region InputSystem
 
@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
     {
         moveInputValue = moveAction.ReadValue<Vector2>();
         // 寻路过程中有键盘输入则打断寻路
-        if (moveInputValue.sqrMagnitude > 0.01f && agent.hasPath) NavigationStop();
+        if (moveInputValue.sqrMagnitude > 0.01f && agent.hasPath) StopNavigation();
 
         if (moveInputValue.sqrMagnitude > 1f)
             moveInputValue = moveInputValue.normalized;
@@ -133,8 +133,9 @@ public class Player : MonoBehaviour
 
     #region 寻路
 
-    public void NavigationToPosition(Vector3 position)
+    public void NavigationToPosition(Vector3 position, Action onNavigationCompleted = null)
     {
+        onNavigationCompletedAction = onNavigationCompleted;
         agent.SetDestination(FindReachablePoint(position));
         StartCoroutine(WaitArrive());
     }
@@ -165,10 +166,17 @@ public class Player : MonoBehaviour
     {
         yield return new WaitUntil(() => HasArrived(agent));
 
-        NavigationStop();
+        StopNavigation();
+        OnNavigationCompleted();
     }
 
-    private void NavigationStop()
+    private void OnNavigationCompleted()
+    {
+        onNavigationCompletedAction?.Invoke();
+        onNavigationCompletedAction = null;
+    }
+
+    private void StopNavigation()
     {
         agent.ResetPath();
     }
@@ -176,6 +184,7 @@ public class Player : MonoBehaviour
     #endregion
 
     #region 道具交互
+
     private void HandleInteract()
     {
         if (GameManager.Instance.CurrentPhase != GamePhase.Gameplay) return;
@@ -183,17 +192,17 @@ public class Player : MonoBehaviour
         if (!interactAction.WasPressedThisFrame()) return;
 
         Vector2 pos = transform.position;
-        Collider2D[] hits = Physics2D.OverlapCircleAll(pos, interactRadius, interactLayer);
+        var hits = Physics2D.OverlapCircleAll(pos, interactRadius, interactLayer);
 
         Interactable best = null;
-        float bestSqr = float.MaxValue;
+        var bestSqr = float.MaxValue;
 
-        for (int i = 0; i < hits.Length; i++)
+        for (var i = 0; i < hits.Length; i++)
         {
             var it = hits[i].GetComponent<Interactable>();
             if (it == null) continue;
 
-            float sqr = ((Vector2)it.transform.position - pos).sqrMagnitude;
+            var sqr = ((Vector2)it.transform.position - pos).sqrMagnitude;
             if (sqr < bestSqr)
             {
                 bestSqr = sqr;
@@ -203,6 +212,7 @@ public class Player : MonoBehaviour
 
         best?.Interact();
     }
+
     #endregion
 
     private void OnEnable()
