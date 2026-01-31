@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     public Vector2 moveInputValue { get; private set; }
     public InputAction moveAction { get; private set; }
     public InputAction interactAction { get; private set; }
+    public InputAction maskAction { get; private set; }
 
     #endregion
 
@@ -63,6 +64,7 @@ public class Player : MonoBehaviour
     {
         moveAction = InputSystem.actions.FindAction("Move");
         interactAction = InputSystem.actions.FindAction("Interact");
+        maskAction = InputSystem.actions.FindAction("Ability");
 
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -84,6 +86,7 @@ public class Player : MonoBehaviour
 
         stateMachine.currentState.Update();
         HandleInteract();
+        HandleMask();
     }
 
     public void SetSpawnPosition(Vector3 position)
@@ -213,6 +216,19 @@ public class Player : MonoBehaviour
         best?.Interact();
     }
 
+    #endregion
+
+    #region 面具能力
+    private void HandleMask()
+    {
+        if (GameManager.Instance.CurrentPhase != GamePhase.Gameplay) return;
+        if (maskAction == null) return;
+
+        if (maskAction.WasPressedThisFrame())
+        {
+            MaskManager.Instance.ToggleMask();
+        }
+    }
     #endregion
 
     private void OnEnable()

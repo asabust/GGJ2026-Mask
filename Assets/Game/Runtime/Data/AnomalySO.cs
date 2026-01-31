@@ -8,9 +8,6 @@ namespace Game.Runtime.Data
         [Header("Identity")]
         public AnomalyName anomalyName = AnomalyName.None; // 建议用 enum，避免字符串拼错
 
-        [Header("Monitor (Normal Snapshot)")]
-        public Sprite monitorNormalSprite; // 监控室/Tab：正常画面截图
-
         [Header("Fragment")]
         public Sprite fragmentSprite;
         [TextArea] public string fragmentDescription;
@@ -20,7 +17,7 @@ namespace Game.Runtime.Data
         public string completionHintText;  // 完成提示文本
         public FragmentName fragmentName = FragmentName.None; // 对应碎片
 
-        [Header("Optional Presentation")]
+        [Header("Anomaly Effect")]
         public Sprite abnormalSprite;      // 戴面具时：异常贴图
         public AudioClip abnormalAudio;    // 戴面具交互：异常音效
     }
