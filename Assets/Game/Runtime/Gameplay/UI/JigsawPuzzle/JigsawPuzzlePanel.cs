@@ -22,6 +22,7 @@ public class JigsawPuzzlePanel : UIPanel
 
     public override void OnOpen(object data = null)
     {
+        placedCount = 0;
         ScatterPieces();
     }
 

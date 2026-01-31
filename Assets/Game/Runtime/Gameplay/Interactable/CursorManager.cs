@@ -45,9 +45,16 @@ public class CursorManager : MonoBehaviour
 
         if (clickAction.action.WasPressedThisFrame())
         {
-            GameManager.Instance.player.NavigationToPosition(worldPos);
-
-            if (currentHover) currentHover.GetComponent<Interactable>()?.Interact();
+            var interactable = currentHover?.GetComponent<Interactable>();
+            GameManager.Instance.player.NavigationToPosition(
+                worldPos,
+                () => OnNavigationCompleted(interactable)
+            );
         }
+    }
+
+    private void OnNavigationCompleted(Interactable interactable)
+    {
+        interactable?.Interact();
     }
 }
