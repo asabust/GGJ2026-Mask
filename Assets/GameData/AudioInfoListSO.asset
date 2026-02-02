@@ -26,7 +26,7 @@ MonoBehaviour:
     volume: 1
     loop: 1
   - audioName: 4
-    clip: {fileID: 8300000, guid: af898d393ebf0437887bcbc1ad4a6297, type: 3}
+    clip: {fileID: 8300000, guid: d3204de4ef7a9424fbde189284335c21, type: 3}
     volume: 1
     loop: 1
   - audioName: 5
@@ -34,7 +34,7 @@ MonoBehaviour:
     volume: 1
     loop: 0
   - audioName: 3
-    clip: {fileID: 8300000, guid: af898d393ebf0437887bcbc1ad4a6297, type: 3}
+    clip: {fileID: 8300000, guid: 3e1a5b05d544f44bda989f3680ce5719, type: 3}
     volume: 1
     loop: 1
   - audioName: 6
